@@ -18,8 +18,8 @@ public class Task1_GraphMining extends Configured implements Tool {
 		Job myjob = Job.getInstance(getConf());
 		myjob.setJarByClass(Task1_GraphMining.class);
 		
-		myjob.setMapperClass(GraphMiningMapper.class);
-		myjob.setReducerClass(GraphMiningReducer.class);
+		myjob.setMapperClass(NormalizeMapper.class);
+		myjob.setReducerClass(NormalizeReducer.class);
 		
 		myjob.setMapOutputKeyClass(IntPairWritable.class);
 		myjob.setMapOutputValueClass(IntWritable.class);

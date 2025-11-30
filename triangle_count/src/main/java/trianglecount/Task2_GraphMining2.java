@@ -43,8 +43,8 @@ public class Task2_GraphMining2 extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task2_GraphMining2.class);
 		
-		job.setMapperClass(GraphMiningMapper.class);
-		job.setReducerClass(GraphMiningReducer.class);
+		job.setMapperClass(NormalizeMapper.class);
+		job.setReducerClass(NormalizeReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -69,8 +69,8 @@ public class Task2_GraphMining2 extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task2_GraphMining2.class);
 		
-		job.setMapperClass(GraphMiningMapper2.class);
-		job.setReducerClass(GraphMiningReducer2.class);
+		job.setMapperClass(DegreeMapper.class);
+		job.setReducerClass(DegreeReducer.class);
 		
 		job.setMapOutputKeyClass(IntWritable.class);
 		job.setMapOutputValueClass(IntPairWritable.class);
@@ -94,8 +94,8 @@ public class Task2_GraphMining2 extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task2_GraphMining2.class);
 		
-		job.setMapperClass(GraphMiningMapper3.class);
-		job.setReducerClass(GraphMiningReducer3.class);
+		job.setMapperClass(ReorientMapper.class);
+		job.setReducerClass(ReorientReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntPairWritable.class);

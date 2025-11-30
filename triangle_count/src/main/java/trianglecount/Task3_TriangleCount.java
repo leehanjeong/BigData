@@ -32,13 +32,14 @@ public class Task3_TriangleCount extends Configured implements Tool {
 		return 0;
 	}
 	
+	// generate wedges
 	private void runStep1(String inputpath, String tmppath) throws Exception{
 		
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task3_TriangleCount.class);
 		
-		job.setMapperClass(TriangleCountMapper1.class);
-		job.setReducerClass(TriangleCountReducer1.class);
+		job.setMapperClass(WedgeMapper.class);
+		job.setReducerClass(WedgeReducer.class);
 		
 		job.setMapOutputKeyClass(IntWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -56,12 +57,13 @@ public class Task3_TriangleCount extends Configured implements Tool {
 		
 	}
 
+	// find triangles
 	private void runStep2(String inputpath, String tmppath, String outpath) throws Exception {
 		
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task3_TriangleCount.class);
 		
-		job.setReducerClass(TriangleCountReducer2.class);
+		job.setReducerClass(TriangleReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -70,8 +72,8 @@ public class Task3_TriangleCount extends Configured implements Tool {
 		
 		job.setOutputFormatClass(TextOutputFormat.class);
 		
-		MultipleInputs.addInputPath(job, new Path(inputpath), TextInputFormat.class, TriangleCountMapperForEdges.class);
-		MultipleInputs.addInputPath(job, new Path(tmppath), SequenceFileInputFormat.class, TriangleCountMapperForWedges.class);
+		MultipleInputs.addInputPath(job, new Path(inputpath), TextInputFormat.class, EdgeMarkerMapper.class);
+		MultipleInputs.addInputPath(job, new Path(tmppath), SequenceFileInputFormat.class, WedgeMarkerMapper.class);
 		
 		FileOutputFormat.setOutputPath(job, new Path(outpath));
 		

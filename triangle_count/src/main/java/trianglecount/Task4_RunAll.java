@@ -48,8 +48,8 @@ public class Task4_RunAll extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task4_RunAll.class);
 		
-		job.setMapperClass(GraphMiningMapper.class);
-		job.setReducerClass(GraphMiningReducer.class);
+		job.setMapperClass(NormalizeMapper.class);
+		job.setReducerClass(NormalizeReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -74,8 +74,8 @@ public class Task4_RunAll extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task4_RunAll.class);
 		
-		job.setMapperClass(GraphMiningMapper2.class);
-		job.setReducerClass(GraphMiningReducer2.class);
+		job.setMapperClass(DegreeMapper.class);
+		job.setReducerClass(DegreeReducer.class);
 		
 		job.setMapOutputKeyClass(IntWritable.class);
 		job.setMapOutputValueClass(IntPairWritable.class);
@@ -99,8 +99,8 @@ public class Task4_RunAll extends Configured implements Tool {
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task4_RunAll.class);
 		
-		job.setMapperClass(GraphMiningMapper3.class);
-		job.setReducerClass(GraphMiningReducer3.class);
+		job.setMapperClass(ReorientMapper.class);
+		job.setReducerClass(ReorientReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntPairWritable.class);
@@ -124,8 +124,8 @@ private void runStep4(String tmppath3, String tmppath4, String outpath) throws E
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task4_RunAll.class);
 		
-		job.setMapperClass(TriangleCountMapper1_ForAll.class);
-		job.setReducerClass(TriangleCountReducer1.class);
+		job.setMapperClass(WedgeSeqMapper.class);
+		job.setReducerClass(WedgeReducer.class);
 		
 		job.setMapOutputKeyClass(IntWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -149,7 +149,7 @@ private void runStep4(String tmppath3, String tmppath4, String outpath) throws E
 		Job job = Job.getInstance(getConf());
 		job.setJarByClass(Task4_RunAll.class);
 		
-		job.setReducerClass(TriangleCountReducer2.class);
+		job.setReducerClass(TriangleReducer.class);
 		
 		job.setMapOutputKeyClass(IntPairWritable.class);
 		job.setMapOutputValueClass(IntWritable.class);
@@ -158,8 +158,8 @@ private void runStep4(String tmppath3, String tmppath4, String outpath) throws E
 		
 		job.setOutputFormatClass(TextOutputFormat.class);
 		
-		MultipleInputs.addInputPath(job, new Path(inputpath), TextInputFormat.class, TriangleCountMapperForEdges.class);
-		MultipleInputs.addInputPath(job, new Path(tmppath4), SequenceFileInputFormat.class, TriangleCountMapperForWedges.class);
+		MultipleInputs.addInputPath(job, new Path(inputpath), TextInputFormat.class, EdgeMarkerMapper.class);
+		MultipleInputs.addInputPath(job, new Path(tmppath4), SequenceFileInputFormat.class, WedgeMarkerMapper.class);
 		
 		FileOutputFormat.setOutputPath(job, new Path(outpath));
 		
